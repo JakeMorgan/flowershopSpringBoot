@@ -8,7 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-@Path("/check_login")
+@Path("/check-login")
 @Service
 public class LoginCheckService {
     @Autowired
