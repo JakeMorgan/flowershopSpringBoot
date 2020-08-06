@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 import java.util.List;
 @Component
 public interface FlowerBusinessService {
-    Flower getFlower(long id);
-    List<Flower> flowersList();
+    Flower getFlower(Long id);
+    List<Flower> getFlowers();
     @Transactional
     Flower updateFlowersCount(Long id, int count) throws Exception;
+    Flower create(String name, BigDecimal price, int quantity);
 }

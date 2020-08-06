@@ -10,4 +10,5 @@ public interface FlowerAccessService {
     Flower getById(Long id);
     @Transactional
     Flower update(Flower flower);
+    Flower create(Flower flower);
 }

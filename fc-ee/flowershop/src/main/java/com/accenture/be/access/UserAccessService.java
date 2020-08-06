@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserAccessService {
     Optional<User> get(String userName);
     @Transactional
-    User getByUserNameAndPassword(String userName, String password);
+    Optional<User> getByUserNameAndPassword(String userName, String password);
     @Transactional
     User create(User user);
     @Transactional

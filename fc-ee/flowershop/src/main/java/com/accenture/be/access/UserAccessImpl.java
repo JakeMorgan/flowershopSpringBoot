@@ -26,26 +26,22 @@ public class UserAccessImpl implements UserAccessService {
     }
 
     @Override
-    public User getByUserNameAndPassword(String userName, String password) {
+    public Optional<User> getByUserNameAndPassword(String userName, String password) {
         try {
             TypedQuery<User> query = entityManager.createQuery("Select u From User u Where u.username=:username and " +
                     "u.password=:password", User.class);
             query.setParameter("username", userName);
             query.setParameter("password", password);
-            return query.getSingleResult();
+            return Optional.ofNullable(query.getSingleResult());
         } catch (NoResultException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
     public User create(User user) {
-        try{
             entityManager.persist(user);
             return user;
-        }catch(NoResultException ex){
-            return null;
-        }
     }
 
     @Override

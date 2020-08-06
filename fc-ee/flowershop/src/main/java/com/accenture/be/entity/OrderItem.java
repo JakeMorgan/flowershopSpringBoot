@@ -24,7 +24,7 @@ public class OrderItem {
     public OrderItem(Flower flower, int amount){
         this.flower = flower;
         this.amount = amount;
-        cost = flower.getPrice();
+        cost = flower.getPrice().multiply(new BigDecimal(amount));
     }
 
     public Long getId() {

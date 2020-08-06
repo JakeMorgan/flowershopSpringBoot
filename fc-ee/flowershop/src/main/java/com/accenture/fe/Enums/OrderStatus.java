@@ -1,15 +1,15 @@
 package com.accenture.fe.Enums;
     public enum OrderStatus {
-        Created,
-        Sent,
-        Complited;
+        CREATED,
+        SENT,
+        COMPLITED;
 
         public OrderStatus next() {
             switch (this) {
-                case Created:
-                    return Sent;
-                case Sent:
-                    return Complited;
+                case CREATED:
+                    return SENT;
+                case SENT:
+                    return COMPLITED;
             }
             return this;
         }

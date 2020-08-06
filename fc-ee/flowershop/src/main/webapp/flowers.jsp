@@ -36,6 +36,27 @@ pageEncoding="ISO-8859-1"%>
     </table>
 </div>
 <button type="button" name="back" class="submit-button" onclick="history.back()">back</button>
+<script type="text/javascript">
+    let selectedTd;
+    const table = document.querySelector('table');
+
+    table.onclick = function (event){
+        let target = event.target;
+        if(target.tagName == 'TD'){
+            getSelectedElement(target);
+        }
+    }
+    function getSelectedElement(td){
+    const tr = td.parentNode;
+    const tds = tr.querySelectorAll('td');
+    selectedTr = {
+        id : tds[0].innerHTML,
+        name : tds[1].innerHTML,
+        price : tds[2].innerHTML,
+        quantity : tds[3].innerHTML,
+    }
+    }
+    </script>
 </body>
 
 </html>

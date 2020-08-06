@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="ORDERS")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class Order {
         this.user = user;
         this.total = total;
         this.orderCreateDate = LocalDate.now();
-        this.status = OrderStatus.Created;
+        this.status = OrderStatus.CREATED;
         this.orderCompleteDate = null;
     }
 

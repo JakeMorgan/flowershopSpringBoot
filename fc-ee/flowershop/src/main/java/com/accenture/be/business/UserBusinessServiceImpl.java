@@ -17,7 +17,9 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 
     @Override
     public Optional<User> login(String userName, String password){
-        return Optional.ofNullable(userAccessService.getByUserNameAndPassword(userName, password));
+        //Optional<User> user = userAccessService.getByUserNameAndPassword(userName, password);
+        //return user.isPresent() ? Optional.empty() : user;
+        return userAccessService.getByUserNameAndPassword(userName, password);
     }
 
     @Override
