@@ -1,7 +1,7 @@
 Create table ORDERS(
 Id long IDENTITY(1,1),
 orderCreateDate TIMESTAMP,
-orderComleteDate TIMESTAMP,
+orderCompleteDate TIMESTAMP,
 total decimal,
 status varchar(10));
 
