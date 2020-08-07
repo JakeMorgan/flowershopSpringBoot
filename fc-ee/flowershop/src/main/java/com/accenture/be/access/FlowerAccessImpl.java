@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 @Component
@@ -17,10 +16,9 @@ public class FlowerAccessImpl implements FlowerAccessService {
     private EntityManager entityManager;
     @Override
     public List<Flower> getFlowers() {
-        List<Flower> flowerList = null;
         try{
             TypedQuery<Flower> query = entityManager.createQuery("select f from Flower f", Flower.class);
-            flowerList = query.getResultList();
+            List<Flower> flowerList = query.getResultList();
             return flowerList;
         }catch(NoResultException ex){
             return Collections.emptyList();
@@ -32,7 +30,7 @@ public class FlowerAccessImpl implements FlowerAccessService {
         try {
             return entityManager.find(Flower.class, id);
         } catch (NoResultException ex) {
-            throw new NullPointerException("Flower getById = null");
+            throw new RuntimeException("Flower getById = null");
         }
     }
 

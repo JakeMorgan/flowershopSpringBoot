@@ -1,11 +1,10 @@
 package com.accenture.be.entity;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import com.accenture.be.entity.User;
+
 import com.accenture.fe.Enums.OrderStatus;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="ORDERS")
@@ -19,7 +18,7 @@ public class Order {
     @JoinColumn(name = "userId")
     private User user;
     private BigDecimal total;
-    public OrderStatus status;
+    private OrderStatus status;
 
     public Order(User user, BigDecimal total){
         this.user = user;

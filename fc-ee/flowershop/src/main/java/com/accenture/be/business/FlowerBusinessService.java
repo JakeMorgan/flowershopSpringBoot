@@ -11,6 +11,6 @@ public interface FlowerBusinessService {
     Flower getFlower(Long id);
     List<Flower> getFlowers();
     @Transactional
-    Flower updateFlowersCount(Long id, int count) throws Exception;
+    Flower updateFlowersCount(Long id, int count);
     Flower create(String name, BigDecimal price, int quantity);
 }

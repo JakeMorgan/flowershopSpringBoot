@@ -19,15 +19,12 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
 
     @Override
     public Order createOrder(User user, BigDecimal total) {
-        Order order = new Order(user, total);
-        orderAccessService.create(order);
-        return order;
+        return orderAccessService.create(new Order(user, total));
     }
 
     public OrderItem createOrderItem(Order order, OrderItem orderItem){
         orderItem.setOrder(order);
-        orderAccessService.createOrderItem(orderItem);
-        return orderItem;
+        return orderAccessService.createOrderItem(orderItem);
     }
 
     @Override

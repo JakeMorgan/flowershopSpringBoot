@@ -17,10 +17,9 @@ public class OrderAccessImpl implements OrderAccessService {
     private EntityManager entityManager;
     @Override
     public List<Order> getOrders() {
-        List<Order> orderList = null;
         try{
             TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
-            orderList = query.getResultList();
+            List<Order> orderList = query.getResultList();
             return orderList;
         }catch(NoResultException ex){
             return Collections.emptyList();
@@ -29,13 +28,8 @@ public class OrderAccessImpl implements OrderAccessService {
 
     @Override
     public Order create(Order order) {
-        try{
             entityManager.persist(order);
             return order;
-        }catch(NoResultException ex){
-            //throw new NullPointerException("Order create order = null");
-            return null;
-        }
     }
 
     public OrderItem createOrderItem(OrderItem orderItem){
@@ -50,22 +44,19 @@ public class OrderAccessImpl implements OrderAccessService {
 
     @Override
     public Order getById(Long id) {
-        try{
-            TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order o WHERE o.id=:id", Order.class);
-            query.setParameter("id", id);
-            return query.getSingleResult();
-        }catch(NoResultException ex){
-            throw new NullPointerException("Order getById = null");
+        try {
+            return entityManager.find(Order.class, id);
+        } catch (NoResultException ex) {
+            throw new RuntimeException("Order getById = null");
         }
     }
 
     @Override
     public List<Order> getOrderByUser(User user) {
         try {
-            List<Order> orderList = null;
             TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order WHERE o.user=:user", Order.class);
             query.setParameter("user", user);
-            orderList = query.getResultList();
+            List<Order> orderList = query.getResultList();
             return orderList;
         }catch(NoResultException ex){
             return Collections.emptyList();

@@ -8,21 +8,18 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/logging-sample.log</file>
+        <file>logs/flowershop.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/logging-sample.%d.zip</fileNamePattern>
             <maxHistory>5</maxHistory>
         </rollingPolicy>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>WARN</level>
-        </filter>
         <encoder>
             <pattern>%date{ISO8601} [%thread] %-5level %class{1}:%line - %msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
-    <logger name="com.accenture.tveratc.eetraining.math" level="debug"/>
+    <logger name="com.accenture" level="debug"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface UserBusinessService {
     Optional<User> login(String userName, String password);
     Optional<User> register(String userName, String password, String address, String phone, BigDecimal balance);
-    User getInfo(String userName);
     User updateBalance(String username, BigDecimal total);
     User updateData(String oldName, String username, String password, String address, String phone);
 }

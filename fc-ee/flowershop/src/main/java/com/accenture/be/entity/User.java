@@ -1,9 +1,5 @@
 package com.accenture.be.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -83,4 +79,12 @@ public class User {
     public int getDiscount(){ return discount; }
 
     public void setDiscount(int discount){ this.discount = discount; }
+
+    public void subtractionBalance(BigDecimal total) {
+        if (balance.compareTo(total) < 0) {
+            throw new RuntimeException("subtraction balance < 0");
+        } else {
+            balance = balance.subtract(total);
+        }
+    }
 }

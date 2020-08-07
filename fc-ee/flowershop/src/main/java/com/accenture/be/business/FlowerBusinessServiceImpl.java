@@ -21,17 +21,14 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
         return flowerAccessService.getFlowers();
     }
 
-    public Flower updateFlowersCount(Long id, int quantity) throws Exception{
+    public Flower updateFlowersCount(Long id, int quantity) {
             Flower flower = flowerAccessService.getById(id);
-            if(flower == null) throw new Exception("UpdateFlowersCount - flower null");
-            flower.setQuantity(flower.getQuantity() - quantity < 0 ? 0 : flower.getQuantity() - quantity);
-            flowerAccessService.update(flower);
-            return flower;
+        flower.subtractionQuantity(quantity);
+        return flowerAccessService.update(flower);
     }
 
     public Flower create(String name, BigDecimal price, int quantity){
         Flower flower = new Flower(name, price, quantity);
-        flowerAccessService.create(flower);
-        return flower;
+        return flowerAccessService.create(flower);
     }
 }

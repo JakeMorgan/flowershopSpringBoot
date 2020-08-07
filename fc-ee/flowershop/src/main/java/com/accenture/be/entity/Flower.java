@@ -51,6 +51,19 @@ public class Flower {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        if (this.quantity < 0) {
+            throw new RuntimeException("Quantity < 0");
+        } else {
+            this.quantity = quantity;
+        }
+
+    }
+
+    public void subtractionQuantity(int quantity) {
+        if (this.quantity - quantity < 0) {
+            throw new RuntimeException("Subtraction quantity < 0");
+        } else {
+            this.quantity = -quantity;
+        }
     }
 }
