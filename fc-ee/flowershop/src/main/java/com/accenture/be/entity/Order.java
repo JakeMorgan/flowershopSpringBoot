@@ -5,7 +5,7 @@ import com.accenture.fe.Enums.OrderStatus;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="ORDERS")
@@ -14,9 +14,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime orderCreateDate;
+    private Date orderCreateDate;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime orderCompleteDate;
+    private Date orderCompleteDate;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "userId")
     private User user;
@@ -32,7 +32,7 @@ public class Order {
     public Order(User user, BigDecimal total) {
         this.user = user;
         this.total = total;
-        this.orderCreateDate = LocalDateTime.now();
+        this.orderCreateDate = new Date();
         this.status = OrderStatus.CREATED;
         this.orderCompleteDate = null;
     }
@@ -41,7 +41,7 @@ public class Order {
         this.status = status;
     }
 
-    public void setCompleteDate(LocalDateTime orderCompleteDate) {
+    public void setCompleteDate(Date orderCompleteDate) {
         this.orderCompleteDate = orderCompleteDate;
     }
 }
