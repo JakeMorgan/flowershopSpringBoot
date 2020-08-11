@@ -37,6 +37,7 @@ public class AdminServlet extends HttpServlet {
         if(request.getParameter("Add") != null){
             flowerBusinessService.create(request.getParameter("name"), new BigDecimal(request.getParameter("price")),
                     Integer.parseInt(request.getParameter("quantity")));
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
         }
     }
 

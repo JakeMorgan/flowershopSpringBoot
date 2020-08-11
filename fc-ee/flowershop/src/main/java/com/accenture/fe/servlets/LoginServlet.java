@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         if (request.getParameter("loginsubmit") != null) {
             Optional<User> optionalUser = userBusinessService.login(request.getParameter("username"), request.getParameter("password"));
             if (optionalUser.isPresent()) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("user", optionalUser.get());
                 response.sendRedirect("index");
             } else {
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         } else if (request.getParameter("regsubmit") != null) {
             Optional<User> optionalUser = userBusinessService.register(request.getParameter("username"), request.getParameter("password"), "", "", new BigDecimal(0), "user");
             if (optionalUser.isPresent()) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("user", optionalUser.get());
                 response.sendRedirect("index");
             } else {

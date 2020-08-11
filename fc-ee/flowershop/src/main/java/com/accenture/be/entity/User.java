@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String userName;
     private String password;
     private String address;
     private String phone;
@@ -21,7 +21,7 @@ public class User {
     }
 
     public User(String userName, String password, String address, String phone, BigDecimal balance, String role) {
-        this.username = userName;
+        this.userName = userName;
         this.password = password;
         this.address = address;
         this.phone = phone;
@@ -39,11 +39,11 @@ public class User {
     }
 
     public String getUserName() {
-        return username;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        this.username = userName;
+        this.userName = userName;
     }
 
     public String getPassword() {

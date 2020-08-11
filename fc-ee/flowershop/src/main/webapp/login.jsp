@@ -12,11 +12,11 @@ pageEncoding="ISO-8859-1"%>
         <h1>User Login</h1>
         <form action="login" method="post">
             <label for="loginl">Login:</label>
-            <input name="username" id ="username" size="30" />
+            <input name="username" id ="username" size="30" value="Admin"/>
             <br>
             <br>
             <label for="passwordl">Password:</label>
-            <input name="password" size="30" />
+            <input name="password" size="30" value="Admin"/>
             <br>
             <label for="message"></label>
             <br>

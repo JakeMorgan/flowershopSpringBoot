@@ -8,4 +8,4 @@ Balance Decimal,
 Discount int,
 Role nvarchar(10));
 
-INSERT into Users values(0, 'Admin', 'Admin', 'Plot', '89205152432', 5000, 0, "admin");
+INSERT into Users values(0, 'Admin', 'Admin', 'Plot', '89205152432', 5000, 0, 'admin');

@@ -21,7 +21,7 @@ public class UserAccessImpl implements UserAccessService {
     @Override
     public Optional<User> get(String userName) {
         try {
-            TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.username=:username", User.class);
+            TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName=:username", User.class);
             query.setParameter("username", userName);
             return Optional.ofNullable(query.getSingleResult());
         }catch(NoResultException ex){
@@ -32,7 +32,7 @@ public class UserAccessImpl implements UserAccessService {
     @Override
     public Optional<User> getByUserNameAndPassword(String userName, String password) {
         try {
-            TypedQuery<User> query = entityManager.createQuery("Select u From User u Where u.username=:username and " +
+            TypedQuery<User> query = entityManager.createQuery("Select u From User u Where u.userName=:username and " +
                     "u.password=:password", User.class);
             query.setParameter("username", userName);
             query.setParameter("password", password);

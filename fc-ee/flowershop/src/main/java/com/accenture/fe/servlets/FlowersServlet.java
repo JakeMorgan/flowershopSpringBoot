@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/flowers")
@@ -34,6 +35,9 @@ public class FlowersServlet extends HttpServlet {
     @Autowired
     UserBusinessService userBusinessService;
 
+    //Список кол-ва цветов для orderItems (ID (0,1,0,3....))
+    private ArrayList<Integer> countFlowers = new ArrayList<>();
+
     @Override
     public void init(ServletConfig config) throws ServletException{
         super.init(config);
@@ -44,7 +48,7 @@ public class FlowersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         List<Flower> flowers = flowerBusinessService.getFlowers();
-        HttpSession session = request.getSession(false); //Убрать true
+        HttpSession session = request.getSession(false);
         session.setAttribute("flowers", flowers);
         request.getRequestDispatcher("/flowers.jsp").forward(request, response);
     }
@@ -52,15 +56,33 @@ public class FlowersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
+
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+
         ArrayList<OrderItem> orderItems = new ArrayList<>();
 
         if(request.getParameter("buy") != null){
-            BigDecimal total = new BigDecimal(0);
-            HttpSession session = request.getSession(false);
-            for (OrderItem o:orderItems){
-                total.add(o.getCost());
+            if (countFlowers.isEmpty()) {
+                throw new RuntimeException("Корзина пуста");
             }
-            User user = (User) session.getAttribute("user");
+            //Фильтрация: ID - Count
+            HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+            Integer am;
+            for (Integer i : countFlowers) {
+                am = hashMap.get(i);
+                hashMap.put(i, am == null ? 1 : am + 1);
+            }
+            //Прогон по HashMap и добавление объектов в список
+            for (Integer key : hashMap.keySet()) {
+                orderItems.add(new OrderItem(flowerBusinessService.getFlower(Long.valueOf(key)), hashMap.get(key)));
+            }
+            //Общая стоимость
+            BigDecimal total = new BigDecimal(0);
+
+            for (OrderItem o:orderItems){
+                total = total.add(o.getCost());
+            }
 
             if (user.checkBalance(total)) {
                 session.setAttribute("user", userBusinessService.updateBalance(user.getUserName(), total));
@@ -72,15 +94,14 @@ public class FlowersServlet extends HttpServlet {
             } else {
                 throw new RuntimeException("No money");
             }
+            countFlowers.clear();
             request.getRequestDispatcher("/flowers.jsp").forward(request, response);
             return;
         }
 
         for (int i = 0; i <= flowerBusinessService.countFlowers(); i++) {
-            LOG.info("START");
             if (request.getParameter("" + i) != null) {
-                orderItems.add(new OrderItem(flowerBusinessService.getFlower(Long.valueOf(1)), 1));
-                LOG.info("CLICK" + i);
+                countFlowers.add(i);
                 request.getRequestDispatcher("/flowers.jsp").forward(request, response);
             }
         }
