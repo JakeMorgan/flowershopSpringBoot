@@ -15,17 +15,19 @@ public class User {
     private String phone;
     private BigDecimal balance;
     private int discount;
+    private String role;
     public User(){
 
     }
 
-    public User(String userName, String password, String address, String phone, BigDecimal balance){
+    public User(String userName, String password, String address, String phone, BigDecimal balance, String role) {
         this.username = userName;
         this.password = password;
         this.address = address;
         this.phone = phone;
         this.balance = balance;
         this.discount = 0;
+        this.role = role;
     }
 
     public Long getId() {
@@ -79,6 +81,14 @@ public class User {
     public int getDiscount(){ return discount; }
 
     public void setDiscount(int discount){ this.discount = discount; }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public User subtractionBalance(BigDecimal total) {
         if (balance.compareTo(total) < 0) {

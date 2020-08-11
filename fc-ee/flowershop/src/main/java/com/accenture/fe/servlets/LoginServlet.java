@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("login");
             }
         } else if (request.getParameter("regsubmit") != null) {
-            Optional<User> optionalUser = userBusinessService.register(request.getParameter("username"), request.getParameter("password"), "", "", new BigDecimal(0));
+            Optional<User> optionalUser = userBusinessService.register(request.getParameter("username"), request.getParameter("password"), "", "", new BigDecimal(0), "user");
             if (optionalUser.isPresent()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", optionalUser.get());

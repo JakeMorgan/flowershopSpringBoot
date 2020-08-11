@@ -22,8 +22,8 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     }
 
     @Override
-    public Optional<User> register(String userName, String password, String address, String phone, BigDecimal balance){
-        return userAccessService.get(userName).isPresent() ? Optional.empty() : Optional.of(userAccessService.create(new User(userName, password, address, phone, balance)));
+    public Optional<User> register(String userName, String password, String address, String phone, BigDecimal balance, String role) {
+        return userAccessService.get(userName).isPresent() ? Optional.empty() : Optional.of(userAccessService.create(new User(userName, password, address, phone, balance, role)));
     }
 
     @Override
