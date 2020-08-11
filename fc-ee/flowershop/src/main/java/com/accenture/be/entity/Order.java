@@ -4,7 +4,6 @@ import com.accenture.fe.Enums.OrderStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -22,8 +21,6 @@ public class Order {
     private User user;
     private BigDecimal total;
     private OrderStatus status;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public Order() {
 

@@ -30,6 +30,6 @@ public class AdminFilterImpl implements Filter {
             } else if (userRole.equals("admin")) {
                 filterChain.doFilter(request, response);
             }
-        } else response.sendRedirect("/login");
+        } else response.sendRedirect(request.getContextPath() + "/login");
     }
 }
