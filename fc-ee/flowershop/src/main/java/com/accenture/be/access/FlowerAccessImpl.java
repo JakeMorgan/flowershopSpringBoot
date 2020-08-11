@@ -39,6 +39,8 @@ public class FlowerAccessImpl implements FlowerAccessService {
         return entityManager.merge(flower);
     }
 
+    @Override
+    @Transactional
     public Flower create(Flower flower){
         entityManager.persist(flower);
         return flower;

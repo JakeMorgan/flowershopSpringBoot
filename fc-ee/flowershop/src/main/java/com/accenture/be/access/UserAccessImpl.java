@@ -3,8 +3,12 @@ package com.accenture.be.access;
 import com.accenture.be.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.Optional;
 
 @Component
@@ -39,12 +43,14 @@ public class UserAccessImpl implements UserAccessService {
     }
 
     @Override
+    @Transactional
     public User create(User user) {
             entityManager.persist(user);
             return user;
     }
 
     @Override
+    @Transactional
     public User update(User user) {
         return entityManager.merge(user);
     }

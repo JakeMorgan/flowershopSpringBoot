@@ -40,6 +40,7 @@ public class OrderAccessImpl implements OrderAccessService {
     }
 
     @Override
+    @Transactional
     public Order update(Order order) {
         return entityManager.merge(order);
     }
