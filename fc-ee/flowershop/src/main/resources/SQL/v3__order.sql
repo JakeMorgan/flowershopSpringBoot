@@ -1,8 +1,7 @@
 Create table ORDERS(
 Id long not null IDENTITY(0,1) PRIMARY KEY,
-dateFormat longtext,
-orderCreateDate TIMESTAMP,
-orderCompleteDate TIMESTAMP,
+orderCreateDate DATE,
+orderCompleteDate DATE,
 userId long,
 total decimal,
 status nvarchar(10),
