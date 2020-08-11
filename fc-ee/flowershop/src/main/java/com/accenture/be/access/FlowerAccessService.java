@@ -11,4 +11,6 @@ public interface FlowerAccessService {
     @Transactional
     Flower update(Flower flower);
     Flower create(Flower flower);
+
+    Long countFlowers();
 }

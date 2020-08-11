@@ -39,7 +39,7 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
 
     public void completeOrder(Long id){
         Order order = orderAccessService.getById(id);
-        order.setStatus(OrderStatus.COMPLITED);
+        order.setStatus(OrderStatus.COMPLETED);
         orderAccessService.update(order);
     }
 }

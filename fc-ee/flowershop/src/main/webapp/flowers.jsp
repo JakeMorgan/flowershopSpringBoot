@@ -17,6 +17,7 @@ pageEncoding="ISO-8859-1"%>
 
 <body>
 <div>
+<form action="flowers" method="post">
     <table class="table">
         <tr>
             <th>ID</th>
@@ -31,9 +32,12 @@ pageEncoding="ISO-8859-1"%>
                 <td>${fl.name}</td>
                 <td>${fl.price}</td>
                 <td>${fl.quantity}</td>
+                <td><button type="submit" name="${fl.id}" id="${fl.id}" method="post">Add</button></td>
             </tr>
         </c:forEach>
     </table>
+    <button type="submit" name="buy" id="buy" method="post">Buy</button>
+    </form>
 </div>
 <button type="button" name="back" class="submit-button" onclick="history.back()">back</button>
 <script type="text/javascript">

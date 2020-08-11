@@ -1,5 +1,5 @@
 CREATE TABLE Flower(
-Id long IDENTITY(1,1),
+Id long not null IDENTITY(0,1) PRIMARY KEY,
 name VARCHAR(50),
 price DECIMAL,
 quantity int

@@ -9,11 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import javax.annotation.PostConstruct;
 import javax.jms.*;
 import java.io.IOException;
-import java.io.StringReader;
 
 @Service
 public class JmsService {
@@ -64,7 +62,7 @@ public class JmsService {
             MessageProducer producer = session.createProducer(sendNewUserXmlQueue);
             producer.send(message);
             producer.close();
-        }catch(JMSException | IOException | NullPointerException e){
+        } catch (JMSException | IOException e) {
             LOG.error("Error send message JMS", e);
         }
     }

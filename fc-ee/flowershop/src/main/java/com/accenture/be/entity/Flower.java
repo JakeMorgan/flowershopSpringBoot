@@ -59,11 +59,12 @@ public class Flower {
 
     }
 
-    public void subtractionQuantity(int quantity) {
+    public Flower subtractionQuantity(int quantity) {
         if (this.quantity - quantity < 0) {
             throw new RuntimeException("Subtraction quantity < 0");
         } else {
             this.quantity = -quantity;
+            return this;
         }
     }
 }

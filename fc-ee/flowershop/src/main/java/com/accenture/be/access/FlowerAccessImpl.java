@@ -1,25 +1,24 @@
 package com.accenture.be.access;
 
 import com.accenture.be.entity.Flower;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
 @Component
 public class FlowerAccessImpl implements FlowerAccessService {
+    private static final Logger LOG = LoggerFactory.getLogger(FlowerAccessImpl.class);
     @PersistenceContext
     private EntityManager entityManager;
     @Override
     public List<Flower> getFlowers() {
         try{
             TypedQuery<Flower> query = entityManager.createQuery("select f from Flower f", Flower.class);
-            List<Flower> flowerList = query.getResultList();
-            return flowerList;
+            return query.getResultList();
         }catch(NoResultException ex){
             return Collections.emptyList();
         }
@@ -43,5 +42,11 @@ public class FlowerAccessImpl implements FlowerAccessService {
     public Flower create(Flower flower){
         entityManager.persist(flower);
         return flower;
+    }
+
+    @Override
+    public Long countFlowers() {
+        Query query = entityManager.createQuery("select Count(f) from Flower f");
+        return (Long) query.getSingleResult();
     }
 }

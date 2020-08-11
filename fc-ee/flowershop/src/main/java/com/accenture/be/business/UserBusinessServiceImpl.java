@@ -28,9 +28,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 
     @Override
     public User updateBalance(String username, BigDecimal total) {
-        User user = userAccessService.get(username).get();
-        user.subtractionBalance(total);
-        return userAccessService.update(user);
+        return userAccessService.update(userAccessService.get(username).get().subtractionBalance(total));
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.accenture.fe.servlets;
 import com.accenture.be.business.FlowerBusinessService;
 import com.accenture.be.business.OrderBusinessService;
 import com.accenture.be.entity.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -15,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin")
 public class AdminServlet extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(AdminServlet.class);
     @Autowired
     OrderBusinessService orderBusinessService;
     @Autowired

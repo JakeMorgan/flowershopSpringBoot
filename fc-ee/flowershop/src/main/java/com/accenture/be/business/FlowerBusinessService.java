@@ -13,4 +13,6 @@ public interface FlowerBusinessService {
     @Transactional
     Flower updateFlowersCount(Long id, int count);
     Flower create(String name, BigDecimal price, int quantity);
+
+    Long countFlowers();
 }

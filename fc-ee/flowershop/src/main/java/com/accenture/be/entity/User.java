@@ -80,11 +80,20 @@ public class User {
 
     public void setDiscount(int discount){ this.discount = discount; }
 
-    public void subtractionBalance(BigDecimal total) {
+    public User subtractionBalance(BigDecimal total) {
         if (balance.compareTo(total) < 0) {
             throw new RuntimeException("subtraction balance < 0");
         } else {
             balance = balance.subtract(total);
+            return this;
+        }
+    }
+
+    public Boolean checkBalance(BigDecimal total) {
+        if (balance.compareTo(total) < 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

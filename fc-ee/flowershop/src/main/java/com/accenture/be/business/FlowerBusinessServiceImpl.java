@@ -22,13 +22,14 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     }
 
     public Flower updateFlowersCount(Long id, int quantity) {
-            Flower flower = flowerAccessService.getById(id);
-        flower.subtractionQuantity(quantity);
-        return flowerAccessService.update(flower);
+        return flowerAccessService.update(flowerAccessService.getById(id).subtractionQuantity(quantity));
     }
 
     public Flower create(String name, BigDecimal price, int quantity){
-        Flower flower = new Flower(name, price, quantity);
-        return flowerAccessService.create(flower);
+        return flowerAccessService.create(new Flower(name, price, quantity));
+    }
+
+    public Long countFlowers() {
+        return flowerAccessService.countFlowers();
     }
 }

@@ -42,6 +42,7 @@ import= "com.accenture.be.entity.User"%>
                 <td>${fl.orderCompleteDate}</td>
                 <td>${fl.total}</td>
                 <td>${fl.status}</td>
+
             </tr>
         </c:forEach>
     </table>
