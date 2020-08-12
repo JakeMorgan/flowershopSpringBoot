@@ -5,6 +5,8 @@ import com.accenture.fe.Enums.OrderStatus;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="ORDERS")
@@ -20,8 +22,11 @@ public class Order {
     @JoinColumn(name = "userId")
     private User user;
     private BigDecimal total;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId")
+    private List<OrderItem> orderItems = new LinkedList<>();
     public Order() {
 
     }
