@@ -16,29 +16,29 @@ pageEncoding="ISO-8859-1"%>
 </head>
 
 <body>
-<center><h2>Flowers</h2></center>
+<center><h2>Basket</h2></center>
 <div>
-<form action="flowers" method="post">
+<form action="basket" method="post">
     <table class="table">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Total sum</th>
         </tr>
 
-        <c:forEach items="${flowers}" var="fl" varStatus="rowStatus">
+        <c:forEach items="${basketList}" var="fl" varStatus="rowStatus">
             <tr>
                 <td>${fl.id}</td>
-                <td>${fl.name}</td>
-                <td>${fl.price}</td>
-                <td>${fl.quantity}</td>
-                <td><button type="submit" name="${fl.id}" id="${fl.id}" method="post">Add</button></td>
+                <td>${fl.flower.name}</td>
+                <td>${fl.flower.price}</td>
+                <td>${fl.amount}</td>
+                <td>${fl.cost}</td>
+                <td><button type="submit" name="${fl.id}" id="${fl.id}" method="post">Del</button></td>
             </tr>
         </c:forEach>
     </table>
-    <button type="submit" name="buy" id="buy" method="post">Buy</button>
-    <button type="submit" name="basket" id="basket" method="post">Basket</button>
     <button type="submit" name="back" id="back" method="post">Back Index</button>
     </form>
 </div>

@@ -65,10 +65,15 @@ public class FlowersServlet extends HttpServlet {
         if (request.getParameter("back") != null) {
             response.sendRedirect("index");
         }
+        if (request.getParameter("basket") != null) {
+            response.sendRedirect(request.getContextPath() + "/flowers/basket");
+        }
         if(request.getParameter("buy") != null){
             user = orderBusinessService.buy(user, countFlowers);
             session.setAttribute("user", user);
             session.setAttribute("countFlowers", new ArrayList<>());
+            List<Flower> flowers = flowerBusinessService.getFlowers();
+            session.setAttribute("flowers", flowers);
             request.getRequestDispatcher("/flowers.jsp").forward(request, response);
             return;
         }

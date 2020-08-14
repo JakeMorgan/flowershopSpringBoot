@@ -2,6 +2,7 @@ package com.accenture.be.business;
 import com.accenture.be.entity.Order;
 import com.accenture.be.entity.OrderItem;
 import com.accenture.be.entity.User;
+import com.accenture.be.others.Basket;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -26,4 +27,8 @@ public interface OrderBusinessService {
     Optional<Order> getById(Long id);
 
     List<OrderItem> getOrderItems(Long orderId);
+
+    List<Basket> basketFilter(List<Long> countFlowers);
+
+    void checkCountFlowers(List<Long> countFlowers);
 }

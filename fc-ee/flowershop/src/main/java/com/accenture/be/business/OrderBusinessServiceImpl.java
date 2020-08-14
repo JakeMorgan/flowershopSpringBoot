@@ -1,9 +1,11 @@
 package com.accenture.be.business;
 
 import com.accenture.be.access.OrderAccessService;
+import com.accenture.be.entity.Flower;
 import com.accenture.be.entity.Order;
 import com.accenture.be.entity.OrderItem;
 import com.accenture.be.entity.User;
+import com.accenture.be.others.Basket;
 import com.accenture.fe.Enums.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -62,6 +64,33 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
         return orderItems;
     }
 
+    public void checkCountFlowers(List<Long> countFlowers) {
+        List<Basket> basketList = basketFilter(countFlowers);
+        for (Basket basket : basketList) {
+            if (basket.getFlower().getQuantity() - basket.getAmount() < 0) {
+                throw new RuntimeException(basket.getFlower().getName() + " - выбрано больше чем есть");
+            }
+        }
+    }
+
+    public List<Basket> basketFilter(List<Long> countFlowers) {
+        if (countFlowers.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<Basket> basketList = new ArrayList<>();
+        Map<Long, Integer> hashMap = new HashMap<>();
+        Integer am;
+        for (Long i : countFlowers) {
+            am = hashMap.get(i);
+            hashMap.put(i, am == null ? 1 : am + 1);
+        }
+        //Прогон по HashMap и добавление объектов в список
+        for (Long key : hashMap.keySet()) {
+            Flower flower = flowerBusinessService.getFlower(Long.valueOf(key));
+            basketList.add(new Basket(Long.valueOf(key), flower, hashMap.get(key), flower.getPrice().multiply(new BigDecimal(hashMap.get(key)))));
+        }
+        return basketList;
+    }
     @Override
     @Transactional
     public User buy(User user, List<Long> countFlowers) {
@@ -69,6 +98,7 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
         if (countFlowers.isEmpty()) {
             throw new RuntimeException("Корзина пуста");
         }
+        checkCountFlowers(countFlowers);
         //Фильтрация: ID - Count
         Map<Long, Integer> hashMap = new HashMap<>();
         Integer am;
@@ -85,6 +115,7 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
 
         for (OrderItem o : orderItems) {
             total = total.add(o.getCost());
+            o.getFlower().subtractionQuantity(o.getAmount());
         }
 
         if (user.checkBalance(total)) {
