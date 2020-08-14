@@ -63,7 +63,7 @@ public class OrderAccessImpl implements OrderAccessService {
     @Override
     public List<Order> getOrderByUser(User user) {
         try {
-            TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order WHERE o.user=:user ORDER BY case o.status" +
+            TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.user=:user ORDER BY case o.status" +
                     " when 'CREATED' then 100" +
                     " when 'SENT' then 101" +
                     " when 'COMPLETED' then 102" +
