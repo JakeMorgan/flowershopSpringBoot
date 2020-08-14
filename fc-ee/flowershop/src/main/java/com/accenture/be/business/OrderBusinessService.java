@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 @Component
 public interface OrderBusinessService {
     @Transactional
@@ -15,6 +17,13 @@ public interface OrderBusinessService {
     OrderItem createOrderItem(Order order, OrderItem orderItem);
     @Transactional
     List<Order> getOrdersList();
-    void completeOrder(Long id);
+
+    Order nextStatusOrder(Long id);
     List<Order> getUserOrders(User user);
+
+    User buy(User user, List<Long> countFlowers);
+
+    Optional<Order> getById(Long id);
+
+    List<OrderItem> getOrderItems(Long orderId);
 }
