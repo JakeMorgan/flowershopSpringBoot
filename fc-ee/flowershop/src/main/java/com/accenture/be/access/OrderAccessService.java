@@ -1,11 +1,12 @@
 package com.accenture.be.access;
 
-import java.util.List;
 import com.accenture.be.entity.Order;
 import com.accenture.be.entity.OrderItem;
 import com.accenture.be.entity.User;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 public interface OrderAccessService {
     @Transactional
@@ -15,7 +16,7 @@ public interface OrderAccessService {
     @Transactional
     Order update(Order order);
     @Transactional
-    Order getById(Long id);
+    Optional<Order> getById(Long id);
 
     List<Order> getOrderByUser(User user);
 

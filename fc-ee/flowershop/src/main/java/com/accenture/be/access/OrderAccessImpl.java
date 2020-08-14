@@ -12,6 +12,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 @Component
 public class OrderAccessImpl implements OrderAccessService {
     @PersistenceContext
@@ -19,7 +21,11 @@ public class OrderAccessImpl implements OrderAccessService {
     @Override
     public List<Order> getOrders() {
         try{
-            TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
+            TypedQuery<Order> query = entityManager.createQuery("select o from Order o ORDER BY case o.status" +
+                    " when 'CREATED' then 100" +
+                    " when 'SENT' then 101" +
+                    " when 'COMPLETED' then 102" +
+                    " end, o.orderCreateDate desc", Order.class);
             return query.getResultList();
         }catch(NoResultException ex){
             return Collections.emptyList();
@@ -46,9 +52,9 @@ public class OrderAccessImpl implements OrderAccessService {
     }
 
     @Override
-    public Order getById(Long id) {
+    public Optional<Order> getById(Long id) {
         try {
-            return entityManager.find(Order.class, id);
+            return Optional.of(entityManager.find(Order.class, id));
         } catch (NoResultException ex) {
             throw new RuntimeException("Order getById = null");
         }
@@ -57,7 +63,11 @@ public class OrderAccessImpl implements OrderAccessService {
     @Override
     public List<Order> getOrderByUser(User user) {
         try {
-            TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order WHERE o.user=:user", Order.class);
+            TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order WHERE o.user=:user ORDER BY case o.status" +
+                    " when 'CREATED' then 100" +
+                    " when 'SENT' then 101" +
+                    " when 'COMPLETED' then 102" +
+                    " end, o.orderCreateDate desc", Order.class);
             query.setParameter("user", user);
             return query.getResultList();
         }catch(NoResultException ex){
