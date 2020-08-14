@@ -16,6 +16,7 @@ pageEncoding="ISO-8859-1"%>
 </head>
 
 <body>
+<center><h2>Flowers</h2></center>
 <div>
 <form action="flowers" method="post">
     <table class="table">
@@ -40,27 +41,6 @@ pageEncoding="ISO-8859-1"%>
     <button type="submit" name="back" id="back" method="post">Back Index</button>
     </form>
 </div>
-<script type="text/javascript">
-    let selectedTd;
-    const table = document.querySelector('table');
-
-    table.onclick = function (event){
-        let target = event.target;
-        if(target.tagName == 'TD'){
-            getSelectedElement(target);
-        }
-    }
-    function getSelectedElement(td){
-    const tr = td.parentNode;
-    const tds = tr.querySelectorAll('td');
-    selectedTr = {
-        id : tds[0].innerHTML,
-        name : tds[1].innerHTML,
-        price : tds[2].innerHTML,
-        quantity : tds[3].innerHTML,
-    }
-    }
-    </script>
 </body>
 
 </html>
