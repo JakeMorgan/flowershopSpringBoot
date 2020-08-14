@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"
-import= "com.accenture.be.entity.User"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.accenture.be.entity.Order"%>
+<%@ taglib prefix="page" tagdir="/WEB-INF/tags" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,9 +28,11 @@ import= "com.accenture.be.entity.User"%>
 </form>
 </div>
 <div>
+<form action="admin" method="post">
     <table class="table">
         <tr>
             <th>ID</th>
+            <th>Address</th>
             <th>Create Date</th>
             <th>Complete Date</th>
             <th>Total</th>
@@ -38,14 +42,17 @@ import= "com.accenture.be.entity.User"%>
         <c:forEach items="${ordersList}" var="fl" varStatus="rowStatus">
             <tr>
                 <td>${fl.id}</td>
+                <td>${fl.user.address}</td>
                 <td>${fl.orderCreateDate}</td>
                 <td>${fl.orderCompleteDate}</td>
                 <td>${fl.total}</td>
                 <td>${fl.status}</td>
-
+                <td><button type="submit" name="info_${fl.id}" id="info" method="post">Info</button></td>
+                <td><button type="submit" name="status_${fl.id}" id="status" method="post">Next</button></td>
             </tr>
         </c:forEach>
     </table>
+    </form>
 </div>
 </body>
 </html>

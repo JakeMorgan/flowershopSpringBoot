@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-@WebServlet("/admin")
+@WebServlet(urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(AdminServlet.class);
     @Autowired
@@ -39,6 +39,19 @@ public class AdminServlet extends HttpServlet {
                     Integer.parseInt(request.getParameter("quantity")));
             request.getRequestDispatcher("/admin.jsp").forward(request, response);
         }
+        List<Order> orderList = orderBusinessService.getOrdersList();
+        HttpSession session = request.getSession();
+        for (Order order : orderList) {
+            if (request.getParameter("info_" + order.getId()) != null) {
+                session.setAttribute("admininfo", order.getId());
+                response.sendRedirect(request.getContextPath() + "/admin/info");
+            } else if (request.getParameter("status_" + order.getId()) != null) {
+                orderBusinessService.nextStatusOrder(order.getId());
+                session.setAttribute("ordersList", orderBusinessService.getOrdersList());
+                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+            }
+        }
+
     }
 
     protected  void doGet(HttpServletRequest request, HttpServletResponse response)

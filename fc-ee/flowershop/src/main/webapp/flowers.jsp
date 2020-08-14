@@ -37,9 +37,9 @@ pageEncoding="ISO-8859-1"%>
         </c:forEach>
     </table>
     <button type="submit" name="buy" id="buy" method="post">Buy</button>
+    <button type="submit" name="back" id="back" method="post">Back Index</button>
     </form>
 </div>
-<button type="button" name="back" class="submit-button" onclick="history.back()">back</button>
 <script type="text/javascript">
     let selectedTd;
     const table = document.querySelector('table');
