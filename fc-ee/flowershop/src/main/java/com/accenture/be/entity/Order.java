@@ -5,7 +5,6 @@ import com.accenture.fe.Enums.OrderStatus;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -24,9 +23,17 @@ public class Order {
     private BigDecimal total;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderId")
-    private List<OrderItem> orderItems = new LinkedList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItem(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     public Order() {
 
     }
@@ -39,11 +46,60 @@ public class Order {
         this.orderCompleteDate = null;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getOrderCreateDate() {
+        return orderCreateDate;
+    }
+
+    public void setOrderCreateDate(Date orderCreateDate) {
+        this.orderCreateDate = orderCreateDate;
+    }
+
+    public Date getOrderCompleteDate() {
+        return orderCompleteDate;
+    }
+
+    public void setOrderCompleteDate(Date orderCompleteDate) {
+        this.orderCompleteDate = orderCompleteDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
-    public void setCompleteDate(Date orderCompleteDate) {
-        this.orderCompleteDate = orderCompleteDate;
+    public void nextStatus() {
+        this.status = status.next();
     }
+
 }

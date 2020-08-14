@@ -2,6 +2,7 @@ package com.accenture.be.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -16,6 +17,8 @@ public class User {
     private BigDecimal balance;
     private int discount;
     private String role;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Order> orderList;
     public User(){
 
     }
@@ -88,6 +91,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     public User subtractionBalance(BigDecimal total) {
