@@ -1,5 +1,6 @@
 package com.accenture.fe.servlets;
 
+import com.accenture.be.access.UserRepository;
 import com.accenture.be.business.UserBusinessService;
 import com.accenture.be.entity.User;
 import org.slf4j.Logger;
@@ -23,6 +24,8 @@ public class LoginServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(LoginServlet.class);
     @Autowired
     UserBusinessService userBusinessService;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

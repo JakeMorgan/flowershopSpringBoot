@@ -19,9 +19,9 @@
        http://cxf.apache.org/schemas/jaxws.xsd">
 
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/flowerShopDS"/>
-    <!--<jee:jndi-lookup id="connectionFactory" jndi-name="jms/connectionFactory"/>
+    <jee:jndi-lookup id="connectionFactory" jndi-name="jms/connectionFactory"/>
     <jee:jndi-lookup id="sendNewUserXmlQueue" jndi-name="jms/outQueue"/>
-    <jee:jndi-lookup id="receiveUserDiscountXmlQueue" jndi-name="jms/inQueue"/>-->
+    <jee:jndi-lookup id="receiveUserDiscountXmlQueue" jndi-name="jms/inQueue"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.accenture"/>
 
@@ -52,8 +52,8 @@
         </property>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="database" value="H2" />
-                <property name="generateDdl" value="true"/>
+                <property name="database" value="ORACLE" />
+                <property name="generateDdl" value="false"/>
                 <property name="showSql" value="true"/>
             </bean>
         </property>

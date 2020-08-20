@@ -1,4 +1,4 @@
-package com.accenture.fe.servlets;
+/*package com.accenture.fe.servlets;
 
 import com.accenture.XMLConverter;
 import com.accenture.be.access.UserAccessService;
@@ -67,3 +67,4 @@ public class JmsService {
         }
     }
 }
+*/

@@ -38,7 +38,7 @@ public class IndexServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User un = (User)session.getAttribute("user");
         if(request.getParameter("save") != null) {
-            User user = userBusinessService.updateData(un.getUserName(), request.getParameter("username"), request.getParameter("password"), request.getParameter("address"),
+            User user = userBusinessService.updateData(un.getId(), request.getParameter("username"), request.getParameter("password"), request.getParameter("address"),
                     request.getParameter("phone"));
             session.setAttribute("user", user);
         }

@@ -119,7 +119,7 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
         }
 
         if (user.checkBalance(total)) {
-            user = userBusinessService.updateBalance(user.getUserName(), total);
+            user = userBusinessService.updateBalance(user.getId(), total);
 
             Order order = createOrder(user, total);
             for (OrderItem o : orderItems) {
